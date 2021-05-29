@@ -25,6 +25,7 @@ class PatientLogin extends Component {
       url: "https://92e252ba1717.ngrok.io/patient/login/",
       method: "post",
       //passing data by subramani
+      //passing again by subramani
       data: this.state,
     }).then((resp) => {
       if (resp.data.jwt_token == "invalid") {
