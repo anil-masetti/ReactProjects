@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ImageUpload</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa+Slab+One">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amaranth">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Tammudu">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ramabhadra">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="../assets/css/Navigation-with-Search.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<style>
+    .container {
+        margin-left: 30em;
+    }
+</style>
+<body>
+    <div style="opacity: 0.92;">
+        <div class="jumbotron d-xl-flex justify-content-xl-center align-items-xl-center" id="heading" style="filter: blur(0px) hue-rotate(0deg) saturate(119%);opacity: 1;margin: 0px;padding: 0px;height: 150px;">
+            <h1 class="text-white d-xl-flex" style="color: rgb(50,55,58);"><strong>ML</strong> BASED COVID DETECTOR AND HELPER</h1>
+        </div>
+    </div>
+    <nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid"><a class="navbar-brand" href="../USER/imageUpload.html"><img src="../assets/img/medical-report.png" style="width: 25px;margin: 5px;">Test</a><a class="navbar-brand" href="../USER/CheckApprovalStatus.html"><img src="../assets/img/Status_check.png" style="width: 25px;margin: 5px;">Application Status</a><a class="navbar-brand" href="../USER/UserMainpage.html"><img src="../assets/img/hospital-bed.png" style="width: 25px;margin: 5px;">Beds Availability</a><a class="navbar-brand" href="#"><i class="fas fa-sign-out-alt"></i>Logout</a><button class="navbar-toggler" data-toggle="collapse"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
+    </nav>
+    <div class="container">
+	<select name="model" id="model">
+                                <option selected>Select Model</option>
+                                <option value="1" >ResNet152</option>
+                                <option value="2">DenseNet201</option>
+                                <option value="3">AlexNet</option>
+                                <option value="4">VGG19</option>
+                            </select>
+            <br><br>
+            <input type="file" accept="image/*" onchange="preview_image(event)">
+            <br><br>
+            <img id="myImg" src="#" height="500px" width="500px\">
+            <script type"text="" javascript"="">
+                function preview_image(event) {
+                  var reader = new FileReader();
+                  reader.onload = function(){
+                    var output = document.getElementById('myImg');
+                    output.src = reader.result;
+                  }
+                  reader.readAsDataURL(event.target.files[0]);
+                }
+            </script>
+            <br>
+            <button class="btn text-center" type="button" style="background-color: rgb(248,66,66);width: 100px;margin: 15px;padding: 10px;margin-left: 14em;margin-bottom: 0px;margin-right: 0px;" onclick="move()">Submit</button>
+    
+            <br><br>
+            <p hidden>Changes of covid : 80% </p>
+            <button class="btn text-center" type="button" style="background-color: rgb(248,66,66);width: 250px;margin: 15px;padding: 10px;margin-left: 10em;margin-bottom: 20px;margin-right: 0px;" onclick="">Search Available hospital-beds</button>
+            
+    </div>
+
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
