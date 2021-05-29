@@ -31,10 +31,14 @@ class PatientSignup extends Component {
     console.log("Username: " + this.state.username);
     console.log("Password: " + this.state.password);
     console.log("phone: ",this.state.phone);
-    /*axios.post('https://e2b386866d7f.ngrok.io/patient/signup/',this.state)
-    .then(response => 
-      console.log(response)
-      );*/
+    axios({
+        url: "https://92e252ba1717.ngrok.io/patient/signup/",
+        method: "post",
+      
+        data: this.state,
+      }).then((resp) => {
+    console.log(resp.data);
+});
  }
 render(){
     return(

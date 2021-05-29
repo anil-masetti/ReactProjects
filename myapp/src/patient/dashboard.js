@@ -20,7 +20,7 @@ const StyledTableCell = withStyles((theme) => ({
     fontSize: 14,
   },
 }))(TableCell);
-const count=0;
+
 const StyledTableRow = withStyles((theme) => ({
   root: {
     "&:nth-of-type(odd)": {
@@ -37,22 +37,25 @@ const useStyles = makeStyles({
 const PatientDashboard = () => {
   
   const classes = useStyles();
-  const [product, setProduct] = useState([]);
-  const [search, setSearch] = useState("");
+  const [beds, setbeds] = useState([]);
+  const [no_of_beds, setno_of_beds] = useState("");
+  const [count, setCount] = useState(1);
 
-  const getProductData = async () => {
+  const getBedsData = async () => {
     try {
       const data = await axios.get(
        "https://92e252ba1717.ngrok.io/patient/bed_availability/"
       );
       console.log(data.data);
-      setProduct(data.data);
+      setbeds(data.data);
     } catch (e) {
       console.log(e);
     }
+   
+    this.increment = this.increment.bind(this)
   };
   useEffect(() => {
-    getProductData();
+    getBedsData();
   }, [])
   
  
@@ -92,12 +95,12 @@ const PatientDashboard = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {product
+            {beds
               .filter((item) => {
-                if (search == "") {
+                if (no_of_beds == "") {
                   return item;
                 } else if (
-                  item.name.toLowerCase().includes(search.toLowerCase())
+                  item.name.toLowerCase().includes(no_of_beds.toLowerCase())
                 ) {
                   return item;
                 }
@@ -105,11 +108,12 @@ const PatientDashboard = () => {
            
               .map((item) => {
                 return (
-                 
+              /*Item=beds*/
                   <StyledTableRow key={item.id}>
                       <StyledTableCell component="th" scope="row">
-                      {count}
-                      count++;
+                      {this.state.count}
+                      { this.state.count++}
+                   
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
                       {item.number}

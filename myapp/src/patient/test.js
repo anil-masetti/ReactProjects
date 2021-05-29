@@ -6,34 +6,37 @@ class PatientTest extends Component {
     super();
     this.props = props;
     this.state = {
-      file: null
-    }    
+      file: null,
+      
+        model: "ResNet152",
+        jwt_token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImhzdWJyYW1hbmk0MiIsInBhc3N3b3JkIjoiaHN1YnJhbWFuaTQyIn0.btHVFSPvC8w_xfTgYU7qLHSECGxdZr_EEH7EYxaG2IA",
+      
+    };
+    this.handleModelChange = this.handleModelChange.bind(this);  
     
   }
-  handleXrayChange= event => {
-    this.handleXrayChange = this.handleXrayChange.bind(this);
-    // Update the state
-    this.setState({ selectedFile: event.target.files[0] });
-    this.setState({ file: URL.createObjectURL(event.target.files[0])})
+  handleXrayChange(e){
+    let file=e.target.files[0];
+    this.setState({ img_file: e.target.files[0] });
+  }
   
-  };
+  handleSymptomsChange(e){
+    this.setState({ symptoms: e.target.value });
+  }
+  handleModelChange(e){
+    this.setState({ model: e.target.value });
+  }
   handleXraySubmit(){
-    const formData = new FormData();
-    formData.append(
-      "myFile",
-      this.state.selectedFile,
-      this.state.selectedFile.name
-    );
-    console.log(this.state.selectedFile);
+    
     axios({
       url: "https://92e252ba1717.ngrok.io/disease/predictor",
       method: "post",
       
-      data:this.state
+      data:this.state,
 
   })
   }
-
+  
   
 render(){
     return(
@@ -55,19 +58,29 @@ render(){
             </div>
         </nav>
         <div className="container">
-        <select name="model" id="model">
+        <select name="DeepLmodel" id="DeepLmodel" onChange={this.handleModelChange}>
                                 <option selected>Select Model</option>
-                                <option value="1" >ResNet152</option>
-                                <option value="2">DenseNet201</option>
-                                <option value="3">AlexNet</option>
-                                <option value="4">VGG19</option>
+                                <option value="ResNet152" >ResNet152</option>
+                                <option value="DenseNet201">DenseNet201</option>
+                                <option value="AlexNet">AlexNet</option>
+                                <option value="VGG19">VGG19</option>
                             </select>
             <br /><br />
+            <input
+                          className="border rounded shadow-none"
+                          type="text"
+                          name="symptoms"
+                          placeholder={"Enter Your Symptoms"}
+                          defaultValue={() => this.state.symptoms}
+                          onChange={(e) => this.handleSymptomsChange(e)}
+                        />
+                        <br /><br />
             <input type="file" name="xray"
              
-            onChange={this.handleXrayChange}/>
+            onChange={(e)=>this.handleXrayChange(e)
+            }/>
             <br />
-            <img src={this.state.file} style={{width:"500px",height:"500px",}}/>
+           {/* <img src={this.state.img_file} style={{width:"500px",height:"500px",}}/>*/}
             <br /><br />
            
            
@@ -78,7 +91,7 @@ render(){
                 
             <br /><br />
             <p hidden>Changes of covid : 80% </p>
-            <button className="btn text-center" type="button" style={{backgroundColor: "#f84242",width:"250px",margin:"15px",padding: "10px",marginLeft: "10em",marginBottom: "20px",marginRight: "0px",}} onclick={""}>Search Available hospital-beds</button>
+            <Link to="/patient/dashboard" className="btn text-center" type="button" style={{backgroundColor: "#f84242",width:"250px",margin:"15px",padding: "10px",marginLeft: "10em",marginBottom: "20px",marginRight: "0px",}} >Search Available hospital-beds</Link>
             
     </div>
 
